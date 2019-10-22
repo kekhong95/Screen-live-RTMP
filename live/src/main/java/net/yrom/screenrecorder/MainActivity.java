@@ -20,7 +20,6 @@ import net.ossrs.yasea.SrsFlvMuxer;
 import net.ossrs.yasea.rtmp.RtmpPublisher;
 
 import java.io.File;
-import java.io.IOException;
 
 public class MainActivity extends Activity implements View.OnClickListener {
     private static final int REQUEST_CODE = 1;
@@ -29,8 +28,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private Button mButton;
     private EditText mEditText;
     private static final String TAG = "MainActivity";
-    private static final int STORAGE_REQUEST_CODE = 102;
-    private static final int AUDIO_REQUEST_CODE   = 103;
+    private static final int PERMISSION_REQUEST_CODE = 102;
 
     private SrsFlvMuxer mSrsFlvMuxer = new SrsFlvMuxer(new RtmpPublisher.EventHandler() {
         @Override
@@ -74,15 +72,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
         mButton = (Button) findViewById(R.id.button);
         mEditText = (EditText) findViewById(R.id.editText);
         if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.RECORD_AUDIO)
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
-                    new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_REQUEST_CODE);
-        }
-
-        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.RECORD_AUDIO)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[] {Manifest.permission.RECORD_AUDIO}, AUDIO_REQUEST_CODE);
+                    new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.RECORD_AUDIO}, PERMISSION_REQUEST_CODE);
         }
         mButton.setOnClickListener(this);
         //noinspection ResourceType
@@ -99,10 +93,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         // video size
         final int width = 720;
         final int height = 1280;
-        File file = new File(Environment.getExternalStorageDirectory(),
-                "record-" + width + "x" + height + "-" + System.currentTimeMillis() + ".mp4");
         final int bitrate = 1000000;
-        mRecorder = new ScreenRecorder(width, height, bitrate, 1, mediaProjection,"rtmp://bsoftserver.ddns.net/live/thanh",mSrsFlvMuxer);
+        mRecorder = new ScreenRecorder(width, height, bitrate, 1, mediaProjection,mEditText.getText().toString(),mSrsFlvMuxer);
         mRecorder.start();
         mButton.setText("Stop Recorder");
         Toast.makeText(this, "Screen recorder is running...", Toast.LENGTH_SHORT).show();

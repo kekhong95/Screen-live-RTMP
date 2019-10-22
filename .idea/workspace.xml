@@ -211,6 +211,7 @@
     <property name="DEBUGGER_ID" value="Auto" />
     <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="4200ea1bd0147457" />
     <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2019-10-11T02:22:15.788Z" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SHOW_ALL_PROCESSES" value="false" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="device.picker.selection" value="ES2BA80708000442" />
