@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Screen-live-RTMP.iml" filepath="$PROJECT_DIR$/Screen-live-RTMP.iml" />
+      <module fileurl="file://$PROJECT_DIR$/live/live.iml" filepath="$PROJECT_DIR$/live/live.iml" />
+      <module fileurl="file://$PROJECT_DIR$/uppush/uppush.iml" filepath="$PROJECT_DIR$/uppush/uppush.iml" />
+    </modules>
+  </component>
+</project>
